@@ -1,0 +1,39 @@
+import mongoose from "mongoose";
+
+const reservationSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+    phone: {
+      type: String,
+      required: true,
+    },
+    date: {
+      type: Date,
+      required: true,
+    },
+    time: {
+      type: String,
+      required: true,
+    },
+    people: {
+      type: Number,
+      required: true,
+      min: 1,
+    },
+    specialRequest: {
+      type: String,
+      default: "",
+    },
+  },
+  { timestamps: true }
+);
+
+const Reservation = mongoose.model("Reservation", reservationSchema);
+export default Reservation;

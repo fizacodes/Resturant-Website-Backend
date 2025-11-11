@@ -1,0 +1,12 @@
+import mongoose from "mongoose";
+
+const menuSchema=new mongoose.Schema({
+    name:{type:String ,required:true},
+    description:{type:String,required:true},
+    price:{type:Number,required:true},
+    category: { type: mongoose.Schema.Types.ObjectId, ref:"Category", required: true },
+    imageUrl:{type:String,required:true}
+},{timestamps:true})   
+
+const Menu=mongoose.model("Menu",menuSchema)
+export default Menu; 
