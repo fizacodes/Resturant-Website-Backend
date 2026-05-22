@@ -15,7 +15,7 @@ const app=express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    origin:'https://resturant-website-frontend-px4c.vercel.app',
+    origin:'https://resturant-website-frontend-pearl.vercel.app',
     credentials:true
 }))
 connectdb();
