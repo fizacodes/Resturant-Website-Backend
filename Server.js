@@ -10,23 +10,33 @@ import authroutes from './routes/authroutes.js';
 import reservationRoutes from './routes/reservationRoutes.js';
 
 dotenv.config();
-const app=express();
+const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({
-    origin:'https://resturant-website-frontend-pearl.vercel.app',
-    credentials:true
-}))
-connectdb();
+app.use(
+  cors({
+    origin: 'https://resturant-website-frontend-pearl.vercel.app',
+    credentials: true,
+  })
+);
 
-app.use('/api/auth',authroutes);
-app.use('/api/menu',menuRoutes)
-app.use('/api/category',categoryRoutes);
-app.use("/api/orders", orderRoutes);
-app.use("/api/reservations", reservationRoutes);
+app.use('/api/auth', authroutes);
+app.use('/api/menu', menuRoutes);
+app.use('/api/category', categoryRoutes);
+app.use('/api/orders', orderRoutes);
+app.use('/api/reservations', reservationRoutes);
 
-const PORT=5000;
-app.listen(PORT,()=>{
-    console.log(`Server is running on port ${PORT}`);
-})
+const startServer = async () => {
+  try {
+    await connectdb();
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error('Failed to start server:', error.message);
+  }
+};
+
+startServer();

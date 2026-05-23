@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
+import mongoose from 'mongoose';
 import serverless from 'serverless-http';
 import connectdb from '../config/connectdb.js';
 import menuRoutes from '../routes/menuRoutes.js';
@@ -22,7 +23,12 @@ app.use(
   })
 );
 
-connectdb();
+app.use(async (req, res, next) => {
+  if (mongoose.connection.readyState !== 1) {
+    await connectdb();
+  }
+  next();
+});
 
 app.use('/api/auth', authroutes);
 app.use('/api/menu', menuRoutes);
