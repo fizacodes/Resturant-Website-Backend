@@ -24,10 +24,15 @@ app.use(
 );
 
 app.use(async (req, res, next) => {
-  if (mongoose.connection.readyState !== 1) {
-    await connectdb();
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      await connectdb();
+    }
+    next();
+  } catch (error) {
+    console.error('DB connection failed:', error);
+    next(error);
   }
-  next();
 });
 
 app.use('/api/auth', authroutes);
@@ -35,5 +40,14 @@ app.use('/api/menu', menuRoutes);
 app.use('/api/category', categoryRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/reservations', reservationRoutes);
+
+app.use((err, req, res, next) => {
+  console.error('Unhandled error:', err);
+  if (!res.headersSent) {
+    res.status(500).json({ error: err.message || 'Internal Server Error' });
+  } else {
+    next(err);
+  }
+});
 
 export default serverless(app);

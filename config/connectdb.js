@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 const connectdb = async () => {
+  if (!process.env.MONGO_URL) {
+    throw new Error('MONGO_URL is required');
+  }
+
   try {
     if (mongoose.connection.readyState >= 1) {
       return;
