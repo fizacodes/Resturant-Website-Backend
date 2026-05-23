@@ -5,13 +5,13 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import mongoose from 'mongoose';
 
-import connectdb from '../config/connectdb.js';
+import connectdb from './config/connectdb.js';
 
-import menuRoutes from '../routes/menuRoutes.js';
-import categoryRoutes from '../routes/categoryRoutes.js';
-import orderRoutes from '../routes/orderRoutes.js';
-import authroutes from '../routes/authroutes.js';
-import reservationRoutes from '../routes/reservationRoutes.js';
+import menuRoutes from './routes/menuRoutes.js';
+import categoryRoutes from './routes/categoryRoutes.js';
+import orderRoutes from './routes/orderRoutes.js';
+import authroutes from './routes/authroutes.js';
+import reservationRoutes from './routes/reservationRoutes.js';
 
 dotenv.config();
 
