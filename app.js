@@ -18,7 +18,7 @@ dotenv.config();
 const app = express();
 
 // connect DB ONCE (not per request)
-connectdb();
+// connectdb();
 
 app.use(express.json());
 app.use(cookieParser());
