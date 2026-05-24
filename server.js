@@ -24,7 +24,6 @@ app.use(cookieParser());
 
 app.use(cors({
   origin: [
-    'http://localhost:5173',
     'https://resturant-website-frontend-pearl.vercel.app'
   ],
   credentials: true
